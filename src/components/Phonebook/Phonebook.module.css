@@ -1,0 +1,10 @@
+.phonebook {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(
+      to right,
+      red 15%,
+      yellow 45%,
+      purple
+    );
+  }
