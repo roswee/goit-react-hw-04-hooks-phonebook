@@ -1,15 +1,35 @@
 import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/actions';
 
-export const Adder = ({onSubmit}) => {
+export const Adder = () => {
+  const contacts = useSelector(state => state.contacts.contacts);
+  const dispatch = useDispatch();
+
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    const id = nanoid();
-    onSubmit({ name, number, id });
+
     form.reset();
+
+    const nameArray = contacts.map(contact => {
+      return contact.name;
+    });
+
+
+    if (nameArray.includes(name)) {
+      return alert(`${name} is already in contacts.`);
+    }
+    return dispatch(addContact({
+      id: nanoid(),
+      name,
+      number,
+    }));
   };
+
+
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -38,4 +58,3 @@ export const Adder = ({onSubmit}) => {
     </form>
   );
 };
-

@@ -1,6 +1,13 @@
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { setFilter } from 'redux/actions';
 
-export const Filter = ({handleFinder}) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  
+  const handleFinder = e => {
+    const value = e.target.value.toLowerCase();
+    dispatch(setFilter(value))
+  }
 
         return (
           <>
@@ -11,6 +18,3 @@ export const Filter = ({handleFinder}) => {
         )
     }
 
-Filter.propTypes = {
-  handleFinder: PropTypes.func
-}
